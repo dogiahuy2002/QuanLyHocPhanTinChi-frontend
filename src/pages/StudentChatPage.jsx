@@ -12,9 +12,8 @@ export default function StudentChatPage() {
       const token = localStorage.getItem("token");
       if (!token) return;
       const apiUrl = "https://quanlyhocphantinchi-backend.onrender.com";
-      `${apiUrl}/profile`;
       try {
-        const res = await fetch(`${apiUrl}/profile`, {
+        const res = await fetch(`${apiUrl}/users/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
