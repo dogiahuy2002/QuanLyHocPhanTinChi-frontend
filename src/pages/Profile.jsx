@@ -7,9 +7,9 @@ const Profile = () => {
     const fetchUser = async () => {
       const token = localStorage.getItem("token");
       if (!token) return;
-
+      const apiUrl = "https://quanlyhocphantinchi-backend.onrender.com";
       try {
-        const res = await fetch("http://localhost:3000/users/profile", {
+        const res = await fetch(`${apiUrl}/users/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -26,7 +26,8 @@ const Profile = () => {
     fetchUser();
   }, []);
 
-  if (!user) return <div className="text-center mt-10 text-lg">Đang tải...</div>;
+  if (!user)
+    return <div className="text-center mt-10 text-lg">Đang tải...</div>;
 
   return (
     <div className="px-10 py-2 bg-white shadow-md space-y-6">

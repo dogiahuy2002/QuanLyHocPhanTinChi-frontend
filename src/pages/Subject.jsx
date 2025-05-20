@@ -9,17 +9,17 @@ const Subject = () => {
     const fetchSubjects = async () => {
       try {
         const token = localStorage.getItem("token"); // Lấy token từ localStorage (hoặc nơi bạn lưu)
-  
-        const res = await fetch("http://localhost:3000/subject", {
+        const apiUrl = "https://quanlyhocphantinchi-backend.onrender.com";
+        const res = await fetch(`${apiUrl}/subject`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`, // Gửi token lên server
           },
         });
-  
+
         const data = await res.json();
-  
+
         if (res.ok) {
           setSubjects(data.data);
         } else {
@@ -29,7 +29,7 @@ const Subject = () => {
         console.error("Lỗi lấy danh sách môn học:", err);
       }
     };
-  
+
     fetchSubjects();
   }, []);
 
@@ -63,16 +63,16 @@ const Subject = () => {
         ),
     },
     {
-        field: "prerequisites",
-        headerName: "Học phần tiên quyết",
-        width: 200,
-        valueGetter: (params) => {
-          const prerequisites = params.row?.prerequisites || [];
-          return prerequisites.length > 0
-            ? prerequisites.map(p => p.prerequisite_subject_id).join(", ")
-            : "Không";
-        }
-    }
+      field: "prerequisites",
+      headerName: "Học phần tiên quyết",
+      width: 200,
+      valueGetter: (params) => {
+        const prerequisites = params.row?.prerequisites || [];
+        return prerequisites.length > 0
+          ? prerequisites.map((p) => p.prerequisite_subject_id).join(", ")
+          : "Không";
+      },
+    },
   ];
 
   return (

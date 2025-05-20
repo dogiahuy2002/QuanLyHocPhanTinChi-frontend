@@ -20,9 +20,10 @@ const Sidebar = () => {
     const fetchProfile = async () => {
       const token = localStorage.getItem("token");
       if (!token) return;
+      const apiUrl = "https://quanlyhocphantinchi-backend.onrender.com";
 
       try {
-        const res = await fetch("http://localhost:3000/users/profile", {
+        const res = await fetch(`${apiUrl}/users/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 

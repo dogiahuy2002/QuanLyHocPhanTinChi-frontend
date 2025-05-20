@@ -10,8 +10,10 @@ export default function Header() {
       const token = localStorage.getItem("token");
       if (!token) return;
 
+      const apiUrl = "https://quanlyhocphantinchi-backend.onrender.com";
+
       try {
-        const res = await fetch("http://localhost:3000/users/profile", {
+        const res = await fetch(`${apiUrl}/users/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -62,12 +64,10 @@ export default function Header() {
               className="w-10 h-10 rounded-full"
             />
             <div>
-                <p className="font-semibold">
-                  {user ? user.student_name : "??"}
-                </p>
-                <p className="text-xs text-gray-500">
-                  {user ? user.email : "Đang tải..."}
-                </p>
+              <p className="font-semibold">{user ? user.student_name : "??"}</p>
+              <p className="text-xs text-gray-500">
+                {user ? user.email : "Đang tải..."}
+              </p>
             </div>
           </div>
         </Link>

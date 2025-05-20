@@ -18,11 +18,13 @@ export default function ClassAdmin() {
       if (year) params.append("year", year);
       if (term) params.append("term", term);
       if (subjectId) params.append("subject_id", subjectId);
-
-      const res = await fetch(
-        `http://localhost:3000/admin/class?${params.toString()}`,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const apiUrl = "https://quanlyhocphantinchi-backend.onrender.com";
+      const res = await fetch(`${apiUrl}/admin/class?${params.toString()}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        credentials: "include", // nếu cần gửi cookie/token
+      });
       const data = await res.json();
 
       if (res.ok) setClasses(data.data);
@@ -42,7 +44,9 @@ export default function ClassAdmin() {
   /* ========================= render ========================= */
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="text-2xl font-bold text-indigo-700">Quản lý Lớp học phần</h1>
+      <h1 className="text-2xl font-bold text-indigo-700">
+        Quản lý Lớp học phần
+      </h1>
 
       {/* --- Filter Bar --- */}
       <div className="flex flex-wrap items-end gap-4 bg-white p-4 shadow rounded-lg">
@@ -119,9 +123,7 @@ export default function ClassAdmin() {
                   <td className="px-3 py-2">
                     {c.current_capacity}/{c.max_capacity}
                   </td>
-                  <td className="px-3 py-2">
-                    {c.isEnrolling ? "Mở" : "Đóng"}
-                  </td>
+                  <td className="px-3 py-2">{c.isEnrolling ? "Mở" : "Đóng"}</td>
                   <td className="px-3 py-2">{c.year}</td>
                   <td className="px-3 py-2">{c.term}</td>
                   <td className="px-3 py-2">

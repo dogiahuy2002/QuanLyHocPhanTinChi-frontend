@@ -11,16 +11,17 @@ export default function StudentChatPage() {
     const fetchUser = async () => {
       const token = localStorage.getItem("token");
       if (!token) return;
-
+      const apiUrl = "https://quanlyhocphantinchi-backend.onrender.com";
+      `${apiUrl}/profile`;
       try {
-        const res = await fetch("http://localhost:3000/users/profile", {
+        const res = await fetch(`${apiUrl}/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
         const data = await res.json();
         if (res.ok) {
-          setUser(data.data); // lấy user từ API
+          setUser(data.data);
         }
       } catch (err) {
         console.error("Lỗi lấy thông tin user:", err);
@@ -29,7 +30,6 @@ export default function StudentChatPage() {
 
     fetchUser();
   }, []);
-  console.log("user", user);
 
   useEffect(() => {
     const initChat = async () => {

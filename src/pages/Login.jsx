@@ -9,9 +9,9 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const apiUrl = "https://quanlyhocphantinchi-backend.onrender.com";
     try {
-      const res = await fetch("http://localhost:3000/users/login", {
+      const res = await fetch(`${apiUrl}/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -27,7 +27,9 @@ const Login = () => {
         toast.success("Đăng nhập thành công!", { position: "top-right" });
         navigate("/"); // về trang chủ
       } else {
-        toast.error("Đăng nhập thất bại: " + data.message, { position: "top-right" });
+        toast.error("Đăng nhập thất bại: " + data.message, {
+          position: "top-right",
+        });
       }
     } catch (err) {
       console.error("Lỗi đăng nhập:", err);
@@ -45,7 +47,9 @@ const Login = () => {
           </h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label className="block text-gray-700 font-medium">Mã số sinh viên</label>
+              <label className="block text-gray-700 font-medium">
+                Mã số sinh viên
+              </label>
               <input
                 type="text"
                 className="w-full p-3 border rounded-full mt-1"
@@ -56,7 +60,9 @@ const Login = () => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 font-medium">Mật khẩu</label>
+              <label className="block text-gray-700 font-medium">
+                Mật khẩu
+              </label>
               <input
                 type="password"
                 className="w-full p-3 border rounded-full mt-1"
@@ -74,29 +80,31 @@ const Login = () => {
             </button>
           </form>
           <p className="text-gray-600 text-sm mt-4 text-center">
-            Quên mật khẩu? <a href="#" className="text-purple-600">Khôi phục</a>
+            Quên mật khẩu?{" "}
+            <a href="#" className="text-purple-600">
+              Khôi phục
+            </a>
           </p>
           <p className="text-gray-600 text-sm mt-4 text-center">
-            Chưa có tài khoản? <a href="#" className="text-purple-600">Đăng ký</a>
+            Chưa có tài khoản?{" "}
+            <a href="#" className="text-purple-600">
+              Đăng ký
+            </a>
           </p>
           <p className="text-gray-600 text-sm mt-4 text-center">
-        <span>Quản trị viên? </span>
-       <a
-           href="/admin/login"
-            className="text-purple-600 font-semibold hover:underline"
-          >
-            Đăng nhập Admin
-          </a>
-        </p>
+            <span>Quản trị viên? </span>
+            <a
+              href="/admin/login"
+              className="text-purple-600 font-semibold hover:underline"
+            >
+              Đăng nhập Admin
+            </a>
+          </p>
         </div>
 
         {/* Hình ảnh minh họa */}
         <div className="w-1/2 hidden md:flex justify-center">
-          <img
-            src="/loginBG.png"
-            alt="Login Illustration"
-            className="w-3/4"
-          />
+          <img src="/loginBG.png" alt="Login Illustration" className="w-3/4" />
         </div>
       </div>
     </div>

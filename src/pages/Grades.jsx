@@ -10,17 +10,17 @@ const Grades = () => {
   const [filters, setFilters] = useState({
     year: "",
     term: "",
-    options: { years: [], terms: [] }
+    options: { years: [], terms: [] },
   });
 
   useEffect(() => {
     const fetchGrades = async () => {
       const token = localStorage.getItem("token");
       if (!token) return;
-
+      const apiUrl = "https://quanlyhocphantinchi-backend.onrender.com";
       try {
-        const res = await fetch("http://localhost:3000/grades", {
-          headers: { Authorization: `Bearer ${token}` }
+        const res = await fetch(`${apiUrl}/grades`, {
+          headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
 

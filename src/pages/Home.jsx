@@ -15,13 +15,13 @@ const Home = () => {
   const fetchData = async () => {
     const token = localStorage.getItem("token");
     if (!token) return;
-
+    const apiUrl = "https://quanlyhocphantinchi-backend.onrender.com";
     try {
       const [profileRes, gradesRes] = await Promise.all([
-        fetch("http://localhost:3000/users/profile", {
+        fetch(`${apiUrl}/users/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        fetch("http://localhost:3000/grades", {
+        fetch(`${apiUrl}/grades`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
       ]);
@@ -49,7 +49,9 @@ const Home = () => {
     if (selectedTerm === "all") {
       setFilteredGrades(grades);
     } else {
-      const filtered = grades.filter((g) => `${g.term}/${g.year}` === selectedTerm);
+      const filtered = grades.filter(
+        (g) => `${g.term}/${g.year}` === selectedTerm
+      );
       setFilteredGrades(filtered);
     }
   }, [selectedTerm, grades]);
@@ -59,11 +61,13 @@ const Home = () => {
       <div className="flex items-center justify-between gap-4 bg-white shadow-md px-6 py-3 border-t-4 border-purple-500">
         <div>
           {profile && <ProfileCard profile={profile} />}
-          <div className="mt-2"><FilterBar grades={grades} setSelectedTerm={setSelectedTerm} /></div>
+          <div className="mt-2">
+            <FilterBar grades={grades} setSelectedTerm={setSelectedTerm} />
+          </div>
         </div>
         <CreditStats grades={filteredGrades} />
       </div>
-        <GPAChart grades={filteredGrades} />
+      <GPAChart grades={filteredGrades} />
     </div>
   );
 };
