@@ -4,25 +4,27 @@ import { toast } from "react-toastify";
 
 export default function AdminLogin() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");       // backend thường login bằng email
+  const [email, setEmail] = useState(""); // backend thường login bằng email
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
     try {
-      const res = await fetch("http://localhost:3000/admin/login", {
+      const res = await fetch(`${apiUrl}/admin/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await res.json();            // { access_token: "…" }
+      const data = await res.json(); // { access_token: "…" }
 
       if (res.ok && data.access_token) {
         localStorage.setItem("adminToken", data.access_token);
         toast.success("Admin login thành công!");
-        navigate("/admin");                     // sang dashboard admin
+        navigate("/admin"); // sang dashboard admin
       } else {
         toast.error(`Đăng nhập thất bại: ${data.message || "Sai thông tin"}`);
       }
@@ -52,7 +54,9 @@ export default function AdminLogin() {
               />
             </div>
             <div className="mb-6">
-              <label className="block text-gray-700 font-medium">Mật khẩu</label>
+              <label className="block text-gray-700 font-medium">
+                Mật khẩu
+              </label>
               <input
                 type="password"
                 className="w-full p-3 border rounded-full mt-1"
@@ -72,11 +76,7 @@ export default function AdminLogin() {
         </div>
 
         <div className="w-1/2 hidden md:flex justify-center">
-        <img
-            src="/loginBG.png"
-            alt="Login Illustration"
-            className="w-3/4"
-          />
+          <img src="/loginBG.png" alt="Login Illustration" className="w-3/4" />
         </div>
       </div>
     </div>
