@@ -10,7 +10,7 @@ export default function AdminLogin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
+    const apiUrl = "https://quanlyhocphantinchi-backend.onrender.com";
 
     try {
       const res = await fetch(`${apiUrl}/admin/login`, {
