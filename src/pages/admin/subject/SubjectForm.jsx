@@ -46,7 +46,7 @@ export default function SubjectForm({ open, onClose, defaultValues }) {
     defaultValues: {
       subject_name: "",
       credits: 3,
-      term: "",
+      term: defaultValues?.term?.toString() || "",
       theory: 3,
       practice: 0,
       isRequired: false,
@@ -76,7 +76,7 @@ export default function SubjectForm({ open, onClose, defaultValues }) {
       subject: {
         subject_name: data.subject_name,
         credits: data.credits,
-        term: data.term,
+        term: data.term.toString(),
         isRequired: data.isRequired,
         theory: data.theory,
         practice: data.practice,
