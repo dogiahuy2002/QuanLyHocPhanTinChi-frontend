@@ -18,7 +18,7 @@ const schema = yup.object({
     .matches(/^[\p{L}\d\s]+$/u, "Không chứa ký tự đặc biệt")
     .required("Tên môn bắt buộc"),
   credits: yup.number().min(1, "≥ 1").max(20, "≤ 20").required("Số tín chỉ?"),
-  term: yup.number().oneOf([1, 2, 3], "Chỉ 1, 2 hoặc 3").required("Học kỳ?"),
+  term: yup.string().oneOf([1, 2, 3], "Chỉ 1, 2 hoặc 3").required("Học kỳ?"),
   theory: yup.number().min(0).required(),
   practice: yup.number().min(0).required(),
   isRequired: yup.boolean(),
