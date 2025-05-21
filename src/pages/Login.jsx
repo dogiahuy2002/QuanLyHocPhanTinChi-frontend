@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { baseURL } from "../api";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -9,9 +10,8 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const apiUrl = "https://quanlyhocphantinchi-backend.onrender.com";
     try {
-      const res = await fetch(`${apiUrl}/users/login`, {
+      const res = await fetch(`${baseURL}/users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

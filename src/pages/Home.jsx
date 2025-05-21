@@ -4,6 +4,7 @@ import ProfileCard from "../components/Home/ProfileCard";
 import GPAChart from "../components/Home/GPAChart";
 import CreditStats from "../components/Home/CreditStats";
 import FilterBar from "../components/Home/FilterBar";
+import { baseURL } from "../api";
 
 const Home = () => {
   const [profile, setProfile] = useState(null);
@@ -15,13 +16,12 @@ const Home = () => {
   const fetchData = async () => {
     const token = localStorage.getItem("token");
     if (!token) return;
-    const apiUrl = "https://quanlyhocphantinchi-backend.onrender.com";
     try {
       const [profileRes, gradesRes] = await Promise.all([
-        fetch(`${apiUrl}/users/profile`, {
+        fetch(`${baseURL}/users/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        fetch(`${apiUrl}/grades`, {
+        fetch(`${baseURL}/grades`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
       ]);

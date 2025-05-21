@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import GradeTable from "../components/GradeTable";
 import GradeSummary from "../components/GradeSummary";
 import GradeFilter from "../components/GradeFilter";
+import { baseURL } from "../api";
 
 const Grades = () => {
   const [grades, setGrades] = useState([]);
@@ -17,9 +18,8 @@ const Grades = () => {
     const fetchGrades = async () => {
       const token = localStorage.getItem("token");
       if (!token) return;
-      const apiUrl = "https://quanlyhocphantinchi-backend.onrender.com";
       try {
-        const res = await fetch(`${apiUrl}/grades`, {
+        const res = await fetch(`${baseURL}/grades`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();

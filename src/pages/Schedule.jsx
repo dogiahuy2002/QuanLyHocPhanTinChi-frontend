@@ -11,6 +11,7 @@ import {
 import WeekControls from "../components/Schedule/WeekControls";
 import CalendarGrid from "../components/Schedule/CalendarGrid";
 import SubjectList from "../components/Schedule/SubjectList";
+import { baseURL } from "../api";
 
 const Schedule = () => {
   const [schedules, setSchedules] = useState([]);
@@ -24,11 +25,9 @@ const Schedule = () => {
 
   useEffect(() => {
     const fetchSchedules = async () => {
-      const apiUrl = "https://quanlyhocphantinchi-backend.onrender.com";
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch(`${apiUrl}/schedule`, {
-          credentials: "include",
+        const res = await fetch(`${baseURL}/schedule`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const json = await res.json();

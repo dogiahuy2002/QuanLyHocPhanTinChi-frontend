@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box, Chip } from "@mui/material";
+import { baseURL } from "../api";
 
 const Subject = () => {
   const [subjects, setSubjects] = useState([]);
@@ -9,8 +10,7 @@ const Subject = () => {
     const fetchSubjects = async () => {
       try {
         const token = localStorage.getItem("token"); // Lấy token từ localStorage (hoặc nơi bạn lưu)
-        const apiUrl = "https://quanlyhocphantinchi-backend.onrender.com";
-        const res = await fetch(`${apiUrl}/subject`, {
+        const res = await fetch(`${baseURL}/subject`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

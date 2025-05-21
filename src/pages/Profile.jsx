@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import { baseURL } from "../api";
 const Profile = () => {
   const [user, setUser] = useState(null);
 
@@ -7,9 +7,8 @@ const Profile = () => {
     const fetchUser = async () => {
       const token = localStorage.getItem("token");
       if (!token) return;
-      const apiUrl = "https://quanlyhocphantinchi-backend.onrender.com";
       try {
-        const res = await fetch(`${apiUrl}/users/profile`, {
+        const res = await fetch(`${baseURL}/users/profile`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
