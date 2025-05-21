@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { api } from "../api";
 
 export default function AdminLogin() {
   const navigate = useNavigate();
@@ -9,11 +10,8 @@ export default function AdminLogin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const apiUrl = "https://quanlyhocphantinchi-backend.onrender.com";
-
     try {
-      const res = await fetch(`${apiUrl}/admin/login`, {
+      const res = await fetch(`${api}/admin/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
