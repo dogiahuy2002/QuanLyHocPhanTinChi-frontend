@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const baseURL = "https://quanlyhocphantinchi-backend.onrender.com";
+export const baseURL = "https://quanlyhocphantinchi-backend.onrender.com";
 
 export const api = axios.create({
   baseURL,
